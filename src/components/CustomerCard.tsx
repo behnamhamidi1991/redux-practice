@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { addFoodToCustomer } from "../features/customerSlice";
 
 interface CustomerCardType {
   id: string;
@@ -25,7 +26,19 @@ export default function CustomerCard({ id, name, food }: CustomerCardType) {
             value={customerFoodInput}
             onChange={(e) => setCustomerFoodInput(e.target.value)}
           />
-          <button>Add</button>
+          <button
+            onClick={() => {
+              if (!customerFoodInput) return;
+              dispatch(
+                addFoodToCustomer({
+                  id,
+                  food: customerFoodInput,
+                })
+              );
+            }}
+          >
+            Add
+          </button>
         </div>
       </div>
     </div>
